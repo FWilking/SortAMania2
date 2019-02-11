@@ -331,10 +331,17 @@ public static void insertionSort(int[] arr)
         return sorted;
     }
 
+    public static void targetSwap(int[] arr, int i, int j){
+        int hold;
+        hold = arr[j];
+        arr[j] = arr[i];
+        arr[i] = hold;
+    }
+
     public static int[] selectionSort(int[] arr){
-        while (!Utilities.isSorted(arr)) {
+        while (!isSorted(arr)) {
             for (int i = 0; i < arr.length; i++) {
-                Utilities.targetSwap(arr, i, minimum(arr, i));
+                targetSwap(arr, i, minimum(arr, i));
             }
         }
         return arr;
