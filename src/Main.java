@@ -4,8 +4,8 @@ public class Main{
 
         Utilities.printIntArr(arr1);
 
-        customsort felSort = new customsort(arr1);
+
         System.out.println("hello, sir");
-        Utilities.printIntArr(felSort.sort());
+
     }
 }

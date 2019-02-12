@@ -81,6 +81,65 @@ private int[] arr;
         return sorted;
     }
 
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    public static void twoDSort(int[][] array)
+    {
+        boolean swaps = false;
+
+        for (int i = 0; i < array.length; i++)
+        {
+            for (int j = 0; j < array[0].length; j++)
+            {
+                if(array[i][j] > array[i][j+1])
+                {
+                    twoDSwap(array, i, j);
+                    swaps = true;
+                }
+
+                if(i == array[0].length-1 && swaps == true)
+                {
+                    j = 0;
+                    swaps = false;
+                }
+            }
+            
+        }
+    }
+
+    //////////////////////////////////////////////////////////////////////////////
+    public static void bubbleSort(int[] arr)
+    {
+        boolean loop = true;
+        boolean swaps = false;
+        int i = 0;
+        int cnt = 0;
+
+        //A Loop that runs while there are still swaps to be potentially made
+        while (loop) {
+            //Swaps index values if the one on the left is greater than the right value
+            if (arr[i] > arr[i + 1]) {
+                swap(arr, i);
+                swaps = true;
+            }
+            i++;
+
+            //Once iteration reaches end of array go back to the beginning if there are swaps to be potentially made
+            if(i == arr.length-1 && swaps == true)
+            {
+                i = 0;
+                swaps = false;
+                cnt++;
+            }
+            //Once iteration reaches end of array ends while loop if there are no more swaps to be made
+            if(i == arr.length-1 && swaps == false)
+            {
+                cnt++;
+                loop = false;
+            }
+        }
+        System.out.println("Number of complete iterations = " + cnt); //Used to test number of iterations needed to sort
+    }
+
 //////////////////////////////////////////////////Insertion/////////////////////////////////////////////////////////////
 public static void insertionSort(int[] arr)
 {
@@ -126,6 +185,15 @@ public static void insertionSort(int[] arr)
         hold = arr[i + 1];
         arr[i + 1] = arr[i];
         arr[i] = hold;
+    }
+
+    //2D swap
+    public static void twoDSwap(int[][] arr, int i, int j)
+    {
+        int hold;
+        hold = arr[i][j+1];
+        arr[i][j+1] = arr[i][j];
+        arr[i][j] = hold;
     }
 
     //Swaps the string at the current index with the next index's string
@@ -288,24 +356,34 @@ public static void insertionSort(int[] arr)
         }
     }
 
-    //Finds median
+    //Searches and returns median
+    //if array is even length finds the two middle indices' sum and divide by 2
+    //otherwise the array must be odd length and finds the middle of the array
     public static int median(int[] arr){
-        int mediani = arr.length/2;;
-        if(0 == arr.length%2){
-            mediani=arr.length/2;
-            return ((arr[mediani-1]+arr[mediani])/2);
+        int median = 0;
+        int arrayLength = arr.length;
+
+        if(arrayLength%2 == 0)
+        {
+            median = (arr[arrayLength/2] + arr[arrayLength/2 + 1])/2;
         }
-        else return (arr[mediani]);
+        else
+        {
+            median = arr[arrayLength/2 + 1];
+        }
+        return median;
     }
 
-    //Search and return index of the requested string.
+    //Search and return index of the requested string
+    //Otherwise if the string isn't found returns -1
     public static int search(String[] arr, String query){
-        for(int i = 0; i <arr.length;i--){
+        int index = -1;
+        for(int i = 0; i <arr.length;i++){
             if(arr[i].equals(query)){
-                return i;
+                index = i;
             }
         }
-        return -1;
+        return index;
     }
 
     //Creates a partially sorted array.
