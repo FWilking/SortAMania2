@@ -1,27 +1,32 @@
 public class Team4SortCompetition extends SortCompetition{
     @Override
     public int challengeOne(int[] arr) {
-        return 0;
+        arr = selectionSort(arr);
+        return median(arr);
     }
 
     @Override
     public int challengeTwo(String[] arr, String query) {
-        return 0;
+        arr = (String[]) comparableSelectionSort(arr);
+        return search(arr, query);
     }
 
     @Override
     public int challengeThree(int[] arr) {
-        return 0;
+        bubbleSort(arr);
+        return median(arr);
     }
 
     @Override
     public int challengeFour(int[][] arr) {
+
         return 0;
     }
 
     @Override
     public int challengeFive(Comparable[] arr, Comparable query) {
-        return 0;
+        arr = comparableSelectionSort(arr);
+        return search(arr, query);
     }
 
 ////////////////////////////////////////////////////Merge///////////////////////////////////////////////////////////////
@@ -61,25 +66,7 @@ private static int[] arr1;
         return arrOut;
     }
 
-//////////////////////////////////////////////////CustomSort////////////////////////////////////////////////////////////
-private int[] arr;
 
-    public Team4SortCompetition(int[] arr){
-        this.arr = arr;
-    }
-
-    public int[] sort(){
-        int[] sorted = new int[arr.length];
-        for (int i = 0; i < arr.length; i++){
-            while (arr[i] < arr[i + 1]){
-                int[] smallList = new int[] {arr[i], arr[i + 1]};
-                merge merger = new merge(smallList, sorted);
-                sorted = sort();
-                i += 2;
-            }
-        }
-        return sorted;
-    }
 
     ////////////////////////////////////////Challenge 4//////////////////////////////////////////////////////////
     public static void twoDSort(int[][] array)
@@ -382,7 +369,7 @@ public static void insertionSort(int[] arr)
 
     //Search and return index of the requested string
     //Otherwise if the string isn't found returns -1
-    public static int search(String[] arr, String query){
+    public static int search(Comparable[] arr, Comparable query){
         int index = -1;
         for(int i = 0; i <arr.length;i++){
             if(arr[i].equals(query)){
@@ -401,7 +388,7 @@ public static void insertionSort(int[] arr)
         return arrNew;
     }
 
-    public static boolean isSortedString(String[] array)
+    public static boolean isSortedComparable(Comparable[] array)
     {
         boolean sorted = true;
         for (int i = 0; i < array.length-2; i += 2)
@@ -422,6 +409,13 @@ public static void insertionSort(int[] arr)
         arr[i] = hold;
     }
 
+    public static void comparableTargetSwap(Comparable[] arr, int i, int j){
+        Comparable hold;
+        hold = arr[j];
+        arr[j] = arr[i];
+        arr[i] = hold;
+    }
+
     public static int[] selectionSort(int[] arr){
         while (!isSorted(arr)) {
             for (int i = 0; i < arr.length; i++) {
@@ -431,9 +425,25 @@ public static void insertionSort(int[] arr)
         return arr;
     }
 
+    public static Comparable[] comparableSelectionSort(Comparable[] arr){
+        while (!isSortedComparable(arr)) {
+            for (int i = 0; i < arr.length; i++) {
+                comparableTargetSwap(arr, i, comparableMinimum(arr, i));
+            }
+        }
+        return arr;
+    }
+
     public static int minimum(int[] arr, int index){
         for(int i = index; i < arr.length; i++){
             if(arr[i] < arr[index]) index = i;
+        }
+        return index;
+    }
+
+    public static int comparableMinimum(Comparable[] arr, int index){
+        for(int i = index; i < arr.length; i++){
+            if(arr[i].compareTo(arr[index]) < 0) index = i;
         }
         return index;
     }
