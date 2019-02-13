@@ -81,11 +81,12 @@ private int[] arr;
         return sorted;
     }
 
-    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////Challenge 4//////////////////////////////////////////////////////////
     public static void twoDSort(int[][] array)
     {
         boolean swaps = false;
 
+        //Sorts the 2D array row by row going through the columns
         for (int i = 0; i < array.length; i++)
         {
             for (int j = 0; j < array[0].length; j++)
@@ -102,7 +103,12 @@ private int[] arr;
                     swaps = false;
                 }
             }
-            
+        }
+
+        //Sorts the 2D array based on the medians of each row
+        for(int k = 0; k < array.length; k++)
+        {
+            if()
         }
     }
 
